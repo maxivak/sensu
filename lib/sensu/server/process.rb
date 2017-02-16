@@ -345,7 +345,8 @@ module Sensu
         @logger.debug("storing check result", :check => check)
         result_key = "#{client[:name]}:#{check[:name]}"
         history_key = "history:#{result_key}"
-        check_truncated = truncate_check_output(check)
+        #check_truncated = truncate_check_output(check)
+        check_truncated = check
         @redis.multi
         @redis.sadd("result:#{client[:name]}", check[:name])
         @redis.set("result:#{result_key}", Sensu::JSON.dump(check_truncated))
